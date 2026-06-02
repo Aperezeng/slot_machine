@@ -10,7 +10,8 @@ System.Random random = new System.Random();
     const int COLUMNS = 3;
     const int WON_MIDDLE = 1;
     const int WON_HORIZONTALS = 5;
-    const int WON_VERTICALS = 10;
+    //const int WON_VERTICALS = 10;
+    const int WON_DIAGONALS = 20; 
     const string HORIZONTALS = "horizontals";
     const string VERTICALS = "verticals";
     const string DIAGONALS = "diagonals";
@@ -71,10 +72,12 @@ System.Random random = new System.Random();
             Console.WriteLine();
         }
 
+        bool win = true;
+        
         //middle line only 
         if (playersMode == "middle")
         {
-            bool win = true;
+            
             int middleLine = rowsCount / 2;
             for (int j = 0; j < colsCount; j++)
             {
@@ -93,21 +96,37 @@ System.Random random = new System.Random();
                 Console.WriteLine($"Congratulations! You won {WON_MIDDLE} dollar!");
             }
         }
-
+        
+        //both diagonal lines 
         if (playersMode == "diagonals")
         {
-            int lastCol = colsCount - 1;
+            int firstSymbol = slotBoard[0, 0];
             for (int i = 0, j = 0; i < rowsCount && j < colsCount; i++, j++)
-                for (int m = 0; m < rowsCount && lastCol >= 0; m++, lastCol--)
             {
-                int firstSymbol = slotBoard[i, j];
-                int currentSymbol = slotBoard[0, 0];
-                int revCurrentSymbol = slotBoard[0, lastCol];
-                if (firstSymbol != currentSymbol && firstSymbol != revCurrentSymbol)
+                int currentSymbol = slotBoard[i, j];
+                if (firstSymbol != currentSymbol)
                 {
                     Console.WriteLine("loser");
+                    win = false;
+                    break;
+                } 
+            }
+
+            int lastColIndex = colsCount - 1;
+            for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
+            {
+                int revCurrentSymbol = slotBoard[m, lastColIndex];
+                if (firstSymbol != revCurrentSymbol)
+                {
+                    Console.WriteLine("loser");
+                    win = false; 
                     break;
                 }
+            }
+
+            if (win)
+            {
+                Console.WriteLine($"Congratulations! You won {WON_DIAGONALS} dollars!");
             }
         }
     }

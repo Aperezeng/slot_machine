@@ -97,6 +97,40 @@ System.Random random = new System.Random();
             }
         }
         
+        //all horizontal lines 
+        if (playersMode == "horizontals")
+        {
+            bool eachWin = true;
+            for (int i = 0; i < rowsCount; i++)
+            {
+                for (int j = 0; j < colsCount; j++)
+                {
+                    
+                    int firstSymbol = slotBoard[0, 0];
+                    int currentSymbol = slotBoard[i, j];
+                    if (firstSymbol != currentSymbol)
+                    {
+                        eachWin = false;
+                        Console.WriteLine("Sorry, you lost! Better luck next time.");
+                        break;
+                    }
+                }
+                
+                //will check for loses. If there are any lose then there won't be any overall win. 
+                if (!eachWin)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            
+            //all horizontal lines win
+            if(win)
+            {
+                Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
+            }
+        }
+        
         //both diagonal lines 
         if (playersMode == "diagonals")
         {

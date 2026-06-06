@@ -10,7 +10,7 @@ System.Random random = new System.Random();
     const int COLUMNS = 3;
     const int WON_MIDDLE = 1;
     const int WON_HORIZONTALS = 5;
-    //const int WON_VERTICALS = 10;
+    const int WON_VERTICALS = 10;
     const int WON_DIAGONALS = 20; 
     const string HORIZONTALS = "horizontals";
     const string VERTICALS = "verticals";
@@ -123,11 +123,39 @@ System.Random random = new System.Random();
                     break;
                 }
             }
-            
             //all horizontal lines win
             if(win)
             {
                 Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
+            }
+        }
+        
+        //all vertical lines 
+        if (playersMode == "verticals")
+        {
+            bool eachWin = true;
+            for (int j = 0; j < colsCount; j++)
+            {
+                for (int i = 0; i < rowsCount; i++)
+                {
+                    int firstSymbol = slotBoard[0, 0];
+                    int currentSymbol = slotBoard[i, j];
+                    if (firstSymbol != currentSymbol)
+                    {
+                        eachWin = false;
+                        Console.WriteLine("Sorry, you lost! Better luck next time.");
+                        break;
+                    }
+                }
+                if (!eachWin)
+                {
+                    win = false;
+                    break;
+                }
+            }
+            if (win)
+            {
+                Console.WriteLine($"Congratulations! You won ${WON_VERTICALS} dollars!");
             }
         }
         
@@ -158,9 +186,10 @@ System.Random random = new System.Random();
                 }
             }
 
+            //win on both diagonals
             if (win)
             {
-                Console.WriteLine($"Congratulations! You won {WON_DIAGONALS} dollars!");
+                Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars!");
             }
         }
     }

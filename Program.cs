@@ -32,8 +32,8 @@ System.Random random = new System.Random();
     Console.WriteLine("Enter your bid. Your bid:");
     int playersWager = ToInt32(Console.ReadLine());
 
-    while (playersMode != "horizontals" && playersMode != "verticals" && playersMode != "diagonals" &&
-           playersMode != "middle")
+    while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
+           playersMode != MIDDLE_LINE)
     {
         Console.WriteLine(
             $"you entered an invalid mode. Your mode must be {HORIZONTALS}, {VERTICALS}, {DIAGONALS}, or {MIDDLE_LINE}");
@@ -41,8 +41,8 @@ System.Random random = new System.Random();
         playersMode = Console.ReadLine();
     }
 
-    if (playersMode == "horizontals" || playersMode == "verticals" || playersMode == "diagonals" ||
-        playersMode == "middle")
+    if (playersMode == HORIZONTALS || playersMode == VERTICALS || playersMode == DIAGONALS ||
+        playersMode == MIDDLE_LINE)
     {
         Console.WriteLine("Let's get started. Best of luck to you");
 
@@ -90,7 +90,6 @@ System.Random random = new System.Random();
                     break;
                 }
             }
-
             if (win)
             {
                 Console.WriteLine($"Congratulations! You won {WON_MIDDLE} dollar!");
@@ -105,7 +104,6 @@ System.Random random = new System.Random();
             {
                 for (int j = 0; j < colsCount; j++)
                 {
-                    
                     int firstSymbol = slotBoard[0, 0];
                     int currentSymbol = slotBoard[i, j];
                     if (firstSymbol != currentSymbol)
@@ -115,7 +113,6 @@ System.Random random = new System.Random();
                         break;
                     }
                 }
-                
                 //will check for loses. If there are any lose then there won't be any overall win. 
                 if (!eachWin)
                 {
@@ -173,7 +170,6 @@ System.Random random = new System.Random();
                     break;
                 } 
             }
-
             int lastColIndex = colsCount - 1;
             for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
             {

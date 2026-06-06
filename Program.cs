@@ -1,197 +1,216 @@
-﻿using System;
-
+﻿
 using static System.Convert;
 System.Random random = new System.Random();
 
+Console.WriteLine("Hello there! Let's get started!");
 {
-    const int LOWER_VALUE = 0;
-    const int UPPER_VALUE = 2;
-    const int ROWS = 3;
-    const int COLUMNS = 3;
-    const int WON_MIDDLE = 1;
-    const int WON_HORIZONTALS = 5;
-    const int WON_VERTICALS = 10;
-    const int WON_DIAGONALS = 20; 
-    const string HORIZONTALS = "horizontals";
-    const string VERTICALS = "verticals";
-    const string DIAGONALS = "diagonals";
-    const string MIDDLE_LINE = "middle";
-
-    int[,] slotBoard = new int[ROWS, COLUMNS];
-
-    Console.WriteLine("Hello there! Let's get started!");
-    Console.WriteLine($"Here are your mode options:");
-    Console.WriteLine($"single middle line: {MIDDLE_LINE}");
-    Console.WriteLine($"all horizontal lines: {HORIZONTALS}");
-    Console.WriteLine($"all vertical lines: {VERTICALS}");
-    Console.WriteLine($"all diagonal lines: {DIAGONALS}");
-
-    Console.WriteLine("What mode would you like?");
-    string playersMode = Console.ReadLine().ToUpper().ToLower();
-
-    Console.WriteLine("Enter your bid. Your bid:");
-    int playersWager = ToInt32(Console.ReadLine());
-
-    while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
-           playersMode != MIDDLE_LINE)
+    bool playing = true;
+    while (playing)
     {
-        Console.WriteLine(
-            $"you entered an invalid mode. Your mode must be {HORIZONTALS}, {VERTICALS}, {DIAGONALS}, or {MIDDLE_LINE}");
-        Console.WriteLine("Enter your mode again");
-        playersMode = Console.ReadLine();
-    }
+        const int LOWER_VALUE = 0;
+        const int UPPER_VALUE = 2;
+        const int ROWS = 3;
+        const int COLUMNS = 3;
+        const int WON_MIDDLE = 1;
+        const int WON_HORIZONTALS = 5;
+        const int WON_VERTICALS = 10;
+        const int WON_DIAGONALS = 20;
+        const string HORIZONTALS = "horizontals";
+        const string VERTICALS = "verticals";
+        const string DIAGONALS = "diagonals";
+        const string MIDDLE_LINE = "middle";
 
-    if (playersMode == HORIZONTALS || playersMode == VERTICALS || playersMode == DIAGONALS ||
-        playersMode == MIDDLE_LINE)
-    {
-        Console.WriteLine("Let's get started. Best of luck to you");
+        int[,] slotBoard = new int[ROWS, COLUMNS];
 
-        Console.WriteLine("Here we go! spinning....");
+        Console.WriteLine("Here are your mode options:");
+        Console.WriteLine($"single middle line: {MIDDLE_LINE}");
+        Console.WriteLine($"all horizontal lines: {HORIZONTALS}");
+        Console.WriteLine($"all vertical lines: {VERTICALS}");
+        Console.WriteLine($"all diagonal lines: {DIAGONALS}");
 
-        //will populate the grid 
-        for (int i = 1; i < ROWS; i++)
+        Console.WriteLine("What mode would you like?");
+        string playersMode = Console.ReadLine().ToUpper().ToLower();
+
+        Console.WriteLine("Enter your bid. Your bid:");
+        int playersWager = ToInt32(Console.ReadLine());
+
+        while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
+               playersMode != MIDDLE_LINE)
         {
-            for (int j = 0; j < COLUMNS; j++)
-            {
-                int spinningWheel = random.Next(LOWER_VALUE, UPPER_VALUE);
-                slotBoard[i, j] = spinningWheel;
-            }
+            Console.WriteLine(
+                $"you entered an invalid mode. Your mode must be {HORIZONTALS}, {VERTICALS}, {DIAGONALS}, or {MIDDLE_LINE}");
+            Console.WriteLine("Enter your mode again");
+            playersMode = Console.ReadLine();
         }
 
-        int rowsCount = slotBoard.GetLength(0);
-        int colsCount = slotBoard.GetLength(1);
-
-        //will go through each cell and show the index and its value
-        for (int i = 0; i < rowsCount; i++)
+        if (playersMode == HORIZONTALS || playersMode == VERTICALS || playersMode == DIAGONALS ||
+            playersMode == MIDDLE_LINE)
         {
-            for (int j = 0; j < colsCount; j++)
-            {
-                Console.Write($"[{i},{j}]: {slotBoard[i, j]} \t");
-            }
+            Console.WriteLine("Let's get started. Best of luck to you");
 
-            Console.WriteLine();
-        }
+            Console.WriteLine("Here we go! spinning....");
 
-        bool win = true;
-        
-        //middle line only 
-        if (playersMode == "middle")
-        {
-            
-            int middleLine = rowsCount / 2;
-            for (int j = 0; j < colsCount; j++)
+            //will populate the grid 
+            for (int i = 1; i < ROWS; i++)
             {
-                int firstSymbol = slotBoard[middleLine, 0];
-                int currentSymbol = slotBoard[middleLine, j];
-                if (firstSymbol != currentSymbol)
+                for (int j = 0; j < COLUMNS; j++)
                 {
-                    win = false;
-                    Console.WriteLine("Sorry, you lost! Better luck next time.");
-                    break;
+                    int spinningWheel = random.Next(LOWER_VALUE, UPPER_VALUE);
+                    slotBoard[i, j] = spinningWheel;
                 }
             }
-            if (win)
-            {
-                Console.WriteLine($"Congratulations! You won {WON_MIDDLE} dollar!");
-            }
-        }
-        
-        //all horizontal lines 
-        if (playersMode == "horizontals")
-        {
-            bool eachWin = true;
+
+            int rowsCount = slotBoard.GetLength(0);
+            int colsCount = slotBoard.GetLength(1);
+
+            //will go through each cell and show the index and its value
             for (int i = 0; i < rowsCount; i++)
             {
                 for (int j = 0; j < colsCount; j++)
                 {
-                    int firstSymbol = slotBoard[0, 0];
-                    int currentSymbol = slotBoard[i, j];
+                    Console.Write($"[{i},{j}]: {slotBoard[i, j]} \t");
+                }
+
+                Console.WriteLine();
+            }
+
+            bool win = true;
+
+            //middle line only 
+            if (playersMode == "middle")
+            {
+
+                int middleLine = rowsCount / 2;
+                for (int j = 0; j < colsCount; j++)
+                {
+                    int firstSymbol = slotBoard[middleLine, 0];
+                    int currentSymbol = slotBoard[middleLine, j];
                     if (firstSymbol != currentSymbol)
                     {
-                        eachWin = false;
+                        win = false;
                         Console.WriteLine("Sorry, you lost! Better luck next time.");
                         break;
                     }
                 }
-                //will check for loses. If there are any lose then there won't be any overall win. 
-                if (!eachWin)
+
+                if (win)
                 {
-                    win = false;
-                    break;
-                }
-            }
-            //all horizontal lines win
-            if(win)
-            {
-                Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
-            }
-        }
-        
-        //all vertical lines 
-        if (playersMode == "verticals")
-        {
-            bool eachWin = true;
-            for (int j = 0; j < colsCount; j++)
-            {
-                for (int i = 0; i < rowsCount; i++)
-                {
-                    int firstSymbol = slotBoard[0, 0];
-                    int currentSymbol = slotBoard[i, j];
-                    if (firstSymbol != currentSymbol)
-                    {
-                        eachWin = false;
-                        Console.WriteLine("Sorry, you lost! Better luck next time.");
-                        break;
-                    }
-                }
-                if (!eachWin)
-                {
-                    win = false;
-                    break;
-                }
-            }
-            if (win)
-            {
-                Console.WriteLine($"Congratulations! You won ${WON_VERTICALS} dollars!");
-            }
-        }
-        
-        //both diagonal lines 
-        if (playersMode == "diagonals")
-        {
-            int firstSymbol = slotBoard[0, 0];
-            for (int i = 0, j = 0; i < rowsCount && j < colsCount; i++, j++)
-            {
-                int currentSymbol = slotBoard[i, j];
-                if (firstSymbol != currentSymbol)
-                {
-                    Console.WriteLine("loser");
-                    win = false;
-                    break;
-                } 
-            }
-            int lastColIndex = colsCount - 1;
-            for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
-            {
-                int revCurrentSymbol = slotBoard[m, lastColIndex];
-                if (firstSymbol != revCurrentSymbol)
-                {
-                    Console.WriteLine("loser");
-                    win = false; 
-                    break;
+                    Console.WriteLine($"Congratulations! You won ${WON_MIDDLE} dollar!");
                 }
             }
 
-            //win on both diagonals
-            if (win)
+            //all horizontal lines 
+            if (playersMode == "horizontals")
             {
-                Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars!");
+                bool eachWin = true;
+                for (int i = 0; i < rowsCount; i++)
+                {
+                    for (int j = 0; j < colsCount; j++)
+                    {
+                        int firstSymbol = slotBoard[0, 0];
+                        int currentSymbol = slotBoard[i, j];
+                        if (firstSymbol != currentSymbol)
+                        {
+                            eachWin = false;
+                            Console.WriteLine("Sorry, you lost! Better luck next time.");
+                            break;
+                        }
+                    }
+
+                    //will check for loses. If there are any lose then there won't be any overall win. 
+                    if (!eachWin)
+                    {
+                        win = false;
+                        break;
+                    }
+                }
+
+                //all horizontal lines win
+                if (win)
+                {
+                    Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
+                }
+            }
+
+            //all vertical lines 
+            if (playersMode == "verticals")
+            {
+                bool eachWin = true;
+                for (int j = 0; j < colsCount; j++)
+                {
+                    for (int i = 0; i < rowsCount; i++)
+                    {
+                        int firstSymbol = slotBoard[0, 0];
+                        int currentSymbol = slotBoard[i, j];
+                        if (firstSymbol != currentSymbol)
+                        {
+                            eachWin = false;
+                            Console.WriteLine("Sorry, you lost! Better luck next time.");
+                            break;
+                        }
+                    }
+
+                    if (!eachWin)
+                    {
+                        win = false;
+                        break;
+                    }
+                }
+
+                if (win)
+                {
+                    Console.WriteLine($"Congratulations! You won ${WON_VERTICALS} dollars!");
+                }
+            }
+
+            //both diagonal lines 
+            if (playersMode == "diagonals")
+            {
+                int firstSymbol = slotBoard[0, 0];
+                for (int i = 0, j = 0; i < rowsCount && j < colsCount; i++, j++)
+                {
+                    int currentSymbol = slotBoard[i, j];
+                    if (firstSymbol != currentSymbol)
+                    {
+                        Console.WriteLine("loser");
+                        win = false;
+                        break;
+                    }
+                }
+
+                int lastColIndex = colsCount - 1;
+                for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
+                {
+                    int revCurrentSymbol = slotBoard[m, lastColIndex];
+                    if (firstSymbol != revCurrentSymbol)
+                    {
+                        Console.WriteLine("loser");
+                        win = false;
+                        break;
+                    }
+                }
+
+                //win on both diagonals
+                if (win)
+                {
+                    Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars!");
+                }
+            }
+            
+            Console.WriteLine("Would you like to continue playing? Enter yes or no");
+
+            string Continue = Console.ReadLine().ToUpper().ToLower();
+
+            if (Continue == "no")
+            {
+                Console.WriteLine("Thanks for playing! See you next time.");
+                break;
+            }
+
+            if (Continue == "yes")
+            {
+                Console.WriteLine("Great! Here we go again :)");
             }
         }
     }
 }
-
-
-
-//check for winning line or winning combination 
-//player's total money won 

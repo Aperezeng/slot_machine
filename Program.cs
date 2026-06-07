@@ -3,22 +3,22 @@ System.Random random = new System.Random();
 
 Console.WriteLine("Hello there! Let's get started!");
 {
+    const int LOWER_VALUE = 0;
+    const int UPPER_VALUE = 2;
+    const int ROWS = 3;
+    const int COLUMNS = 3;
+    const int WON_MIDDLE = 1;
+    const int WON_HORIZONTALS = 5;
+    const int WON_VERTICALS = 10;
+    const int WON_DIAGONALS = 20;
+    const string HORIZONTALS = "horizontals";
+    const string VERTICALS = "verticals";
+    const string DIAGONALS = "diagonals";
+    const string MIDDLE_LINE = "middle";
     bool playing = true;
+    
     while (playing)
     {
-        const int LOWER_VALUE = 0;
-        const int UPPER_VALUE = 2;
-        const int ROWS = 3;
-        const int COLUMNS = 3;
-        const int WON_MIDDLE = 1;
-        const int WON_HORIZONTALS = 5;
-        const int WON_VERTICALS = 10;
-        const int WON_DIAGONALS = 20;
-        const string HORIZONTALS = "horizontals";
-        const string VERTICALS = "verticals";
-        const string DIAGONALS = "diagonals";
-        const string MIDDLE_LINE = "middle";
-       
         int[,] slotBoard = new int[ROWS, COLUMNS];
 
         Console.WriteLine("Here are your mode options:");

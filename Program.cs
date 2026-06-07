@@ -1,5 +1,4 @@
-﻿
-using static System.Convert;
+﻿using static System.Convert;
 System.Random random = new System.Random();
 
 Console.WriteLine("Hello there! Let's get started!");
@@ -19,7 +18,7 @@ Console.WriteLine("Hello there! Let's get started!");
         const string VERTICALS = "verticals";
         const string DIAGONALS = "diagonals";
         const string MIDDLE_LINE = "middle";
-
+       
         int[,] slotBoard = new int[ROWS, COLUMNS];
 
         Console.WriteLine("Here are your mode options:");
@@ -51,7 +50,7 @@ Console.WriteLine("Hello there! Let's get started!");
             Console.WriteLine("Here we go! spinning....");
 
             //will populate the grid 
-            for (int i = 1; i < ROWS; i++)
+            for (int i = 0; i < ROWS; i++)
             {
                 for (int j = 0; j < COLUMNS; j++)
                 {
@@ -96,6 +95,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 if (win)
                 {
                     Console.WriteLine($"Congratulations! You won ${WON_MIDDLE} dollar!");
+                    int winning = WON_MIDDLE;
                 }
             }
 
@@ -129,6 +129,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 if (win)
                 {
                     Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
+                    int winning = WON_HORIZONTALS;
                 }
             }
 
@@ -160,6 +161,8 @@ Console.WriteLine("Hello there! Let's get started!");
                 if (win)
                 {
                     Console.WriteLine($"Congratulations! You won ${WON_VERTICALS} dollars!");
+                    int winning = WON_VERTICALS;
+                    
                 }
             }
 
@@ -172,7 +175,6 @@ Console.WriteLine("Hello there! Let's get started!");
                     int currentSymbol = slotBoard[i, j];
                     if (firstSymbol != currentSymbol)
                     {
-                        Console.WriteLine("loser");
                         win = false;
                         break;
                     }
@@ -184,7 +186,6 @@ Console.WriteLine("Hello there! Let's get started!");
                     int revCurrentSymbol = slotBoard[m, lastColIndex];
                     if (firstSymbol != revCurrentSymbol)
                     {
-                        Console.WriteLine("loser");
                         win = false;
                         break;
                     }
@@ -193,10 +194,11 @@ Console.WriteLine("Hello there! Let's get started!");
                 //win on both diagonals
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars!");
+                    Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars");
+                    int winning = WON_DIAGONALS;
                 }
             }
-            
+
             Console.WriteLine("Would you like to continue playing? Enter yes or no");
 
             string Continue = Console.ReadLine().ToUpper().ToLower();
@@ -214,3 +216,6 @@ Console.WriteLine("Hello there! Let's get started!");
         }
     }
 }
+
+
+

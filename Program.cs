@@ -7,14 +7,11 @@ Console.WriteLine("Hello there! Let's get started!");
     const int UPPER_VALUE = 2;
     const int ROWS = 3;
     const int COLUMNS = 3;
-    const int WON_MIDDLE = 1;
-    const int WON_HORIZONTALS = 5;
-    const int WON_VERTICALS = 10;
-    const int WON_DIAGONALS = 20;
     const string HORIZONTALS = "horizontals";
     const string VERTICALS = "verticals";
     const string DIAGONALS = "diagonals";
     const string MIDDLE_LINE = "middle";
+    
     bool playing = true;
     
     while (playing)
@@ -27,12 +24,12 @@ Console.WriteLine("Hello there! Let's get started!");
         Console.WriteLine($"all vertical lines: {VERTICALS}");
         Console.WriteLine($"all diagonal lines: {DIAGONALS}");
 
-        Console.WriteLine("What mode would you like?");
-        string playersMode = Console.ReadLine().ToUpper().ToLower();
-
-        Console.WriteLine("Enter your bid. Your bid:");
+        Console.WriteLine("Enter your bid:");
         int playersWager = ToInt32(Console.ReadLine());
-
+        
+        Console.WriteLine("What mode would you like?");
+        string playersMode = Console.ReadLine().ToLower();
+        
         while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
                playersMode != MIDDLE_LINE)
         {
@@ -69,7 +66,6 @@ Console.WriteLine("Hello there! Let's get started!");
                 {
                     Console.Write($"[{i},{j}]: {slotBoard[i, j]} \t");
                 }
-
                 Console.WriteLine();
             }
 
@@ -91,11 +87,9 @@ Console.WriteLine("Hello there! Let's get started!");
                         break;
                     }
                 }
-
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won ${WON_MIDDLE} dollar!");
-                    int winning = WON_MIDDLE;
+                    Console.WriteLine($"Congratulations!");
                 }
             }
 
@@ -107,7 +101,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 {
                     for (int j = 0; j < colsCount; j++)
                     {
-                        int firstSymbol = slotBoard[0, 0];
+                        int firstSymbol = slotBoard[i, 0];
                         int currentSymbol = slotBoard[i, j];
                         if (firstSymbol != currentSymbol)
                         {
@@ -128,8 +122,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 //all horizontal lines win
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won ${WON_HORIZONTALS} dollars!");
-                    int winning = WON_HORIZONTALS;
+                    Console.WriteLine($"Congratulations! You won!");
                 }
             }
 
@@ -141,7 +134,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 {
                     for (int i = 0; i < rowsCount; i++)
                     {
-                        int firstSymbol = slotBoard[0, 0];
+                        int firstSymbol = slotBoard[0, j];
                         int currentSymbol = slotBoard[i, j];
                         if (firstSymbol != currentSymbol)
                         {
@@ -160,9 +153,7 @@ Console.WriteLine("Hello there! Let's get started!");
 
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won ${WON_VERTICALS} dollars!");
-                    int winning = WON_VERTICALS;
-                    
+                    Console.WriteLine($"Congratulations!");
                 }
             }
 
@@ -194,14 +185,13 @@ Console.WriteLine("Hello there! Let's get started!");
                 //win on both diagonals
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won ${WON_DIAGONALS} dollars");
-                    int winning = WON_DIAGONALS;
+                    Console.WriteLine($"Congratulations! You won");
                 }
             }
 
             Console.WriteLine("Would you like to continue playing? Enter yes or no");
 
-            string Continue = Console.ReadLine().ToUpper().ToLower();
+            string Continue = Console.ReadLine().ToLower();
 
             if (Continue == "no")
             {

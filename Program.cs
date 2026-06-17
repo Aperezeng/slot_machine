@@ -1,4 +1,5 @@
-﻿using static System.Convert;
+﻿using System.ComponentModel.Design;
+using static System.Convert;
 System.Random random = new System.Random();
 
 Console.WriteLine("Hello there! Let's get started!");
@@ -25,7 +26,15 @@ Console.WriteLine("Hello there! Let's get started!");
         Console.WriteLine($"all diagonal lines: {DIAGONALS}");
 
         Console.WriteLine("Enter your bid:");
-        int playersWager = ToInt32(Console.ReadLine());
+        string validWager = Console.ReadLine();
+        int playerWager;
+        while (!int.TryParse(validWager, out playerWager))
+        {
+            Console.WriteLine("You entered an invalid input. Must enter a number");
+            Console.WriteLine("Enter your bid again");
+            validWager = Console.ReadLine();
+        }
+        Console.WriteLine($"Great! You entered {playerWager}");
         
         Console.WriteLine("What mode would you like?");
         string playersMode = Console.ReadLine().ToLower();
@@ -33,10 +42,9 @@ Console.WriteLine("Hello there! Let's get started!");
         while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
                playersMode != MIDDLE_LINE)
         {
-            Console.WriteLine(
-                $"you entered an invalid mode. Your mode must be {HORIZONTALS}, {VERTICALS}, {DIAGONALS}, or {MIDDLE_LINE}");
+            Console.WriteLine($"you entered an invalid mode. Your mode must be {HORIZONTALS}, {VERTICALS}, {DIAGONALS}, or {MIDDLE_LINE}");
             Console.WriteLine("Enter your mode again");
-            playersMode = Console.ReadLine();
+            playersMode = Console.ReadLine().ToLower();
         }
 
         if (playersMode == HORIZONTALS || playersMode == VERTICALS || playersMode == DIAGONALS ||
@@ -122,7 +130,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 //all horizontal lines win
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won!");
+                    Console.WriteLine("Congratulations! You won!");
                 }
             }
 
@@ -153,7 +161,7 @@ Console.WriteLine("Hello there! Let's get started!");
 
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations!");
+                    Console.WriteLine("Congratulations!");
                 }
             }
 

@@ -39,8 +39,6 @@ Console.WriteLine("Hello there! Let's get started!");
             validWager = Console.ReadLine();
         }
 
-        Console.WriteLine($"Great! Your balance is: {playerWager}");
-
         Console.WriteLine("What mode would you like?");
         string playersMode = Console.ReadLine().ToLower();
 
@@ -83,8 +81,6 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             bool win = true;
-            
-            int loss = 0;
             int jackpot = 0; 
             
             //middle line only 
@@ -209,13 +205,12 @@ Console.WriteLine("Hello there! Let's get started!");
                     jackpot = WON_DIAGONALS;
                 }
             }
-
-            int goodBalance = jackpot + playerWager;
-            while (jackpot > 0)
+            
+            if (jackpot != 0)
             {
-                jackpot++;
+                int goodBalance = jackpot + playerWager;
+                Console.WriteLine($"Your balance is now: {goodBalance}");
             }
-            Console.WriteLine($"Your balance is now: {goodBalance}");
             
             Console.WriteLine("Would you like to continue playing? Enter yes or no");
 

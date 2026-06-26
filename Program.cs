@@ -18,6 +18,9 @@ Console.WriteLine("Hello there! Let's get started!");
     const int WON_DIAGONALS = 20;
 
     bool playing = true;
+    int losses = 0;
+    int jackpot = 0;
+    int totalBalance = 0; 
 
     while (playing)
     {
@@ -38,6 +41,10 @@ Console.WriteLine("Hello there! Let's get started!");
             Console.WriteLine("Enter your bid again");
             validWager = Console.ReadLine();
         }
+
+        totalBalance += playerWager; 
+        
+        Console.WriteLine($"your current balance is {totalBalance}");
 
         Console.WriteLine("What mode would you like?");
         string playersMode = Console.ReadLine().ToLower();
@@ -81,7 +88,6 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             bool win = true;
-            int jackpot = 0; 
             
             //middle line only 
             if (playersMode == "middle")
@@ -154,6 +160,7 @@ Console.WriteLine("Hello there! Let's get started!");
                         if (firstSymbol != currentSymbol)
                         {
                             eachWin = false;
+                            losses = playerWager; 
                             Console.WriteLine("Sorry, you lost! Better luck next time.");
                             break;
                         }
@@ -201,16 +208,22 @@ Console.WriteLine("Hello there! Let's get started!");
                 //win on both diagonals
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won {WON_DIAGONALS} points!");
                     jackpot = WON_DIAGONALS;
                 }
             }
             
-            if (jackpot != 0)
+            if (!win)
             {
-                int goodBalance = jackpot + playerWager;
-                Console.WriteLine($"Your balance is now: {goodBalance}");
+                totalBalance = totalBalance - playerWager + jackpot;
+                Console.WriteLine($"You lost {playerWager} points");
             }
+            else if (win)
+            {
+                totalBalance = playerWager + jackpot;
+                Console.WriteLine($"You won {jackpot} points");
+            }
+            
+            Console.WriteLine($"Your current balance is {totalBalance}");
             
             Console.WriteLine("Would you like to continue playing? Enter yes or no");
 

@@ -12,9 +12,13 @@ Console.WriteLine("Hello there! Let's get started!");
     const string VERTICALS = "verticals";
     const string DIAGONALS = "diagonals";
     const string MIDDLE_LINE = "middle";
-    
+    const int WON_MIDDLE_LINE = 5; 
+    const int WON_HORIZONTALS = 10;
+    const int WON_VERTICALS = 15;
+    const int WON_DIAGONALS = 20;
+
     bool playing = true;
-    
+
     while (playing)
     {
         int[,] slotBoard = new int[ROWS, COLUMNS];
@@ -34,11 +38,12 @@ Console.WriteLine("Hello there! Let's get started!");
             Console.WriteLine("Enter your bid again");
             validWager = Console.ReadLine();
         }
-        Console.WriteLine($"Great! You entered {playerWager}");
-        
+
+        Console.WriteLine($"Great! Your balance is: {playerWager}");
+
         Console.WriteLine("What mode would you like?");
         string playersMode = Console.ReadLine().ToLower();
-        
+
         while (playersMode != HORIZONTALS && playersMode != VERTICALS && playersMode != DIAGONALS &&
                playersMode != MIDDLE_LINE)
         {
@@ -78,7 +83,10 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             bool win = true;
-
+            
+            int loss = 0;
+            int jackpot = 0; 
+            
             //middle line only 
             if (playersMode == "middle")
             {
@@ -95,9 +103,11 @@ Console.WriteLine("Hello there! Let's get started!");
                         break;
                     }
                 }
+
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations!");
+                    Console.WriteLine($"Congratulations! You won {WON_MIDDLE_LINE} points!");
+                    jackpot = WON_MIDDLE_LINE;
                 }
             }
 
@@ -130,7 +140,8 @@ Console.WriteLine("Hello there! Let's get started!");
                 //all horizontal lines win
                 if (win)
                 {
-                    Console.WriteLine("Congratulations! You won!");
+                    Console.WriteLine($"Congratulations! You won {WON_HORIZONTALS} points!");
+                    jackpot = WON_HORIZONTALS;
                 }
             }
 
@@ -161,7 +172,8 @@ Console.WriteLine("Hello there! Let's get started!");
 
                 if (win)
                 {
-                    Console.WriteLine("Congratulations!");
+                    Console.WriteLine($"Congratulations! You won {WON_VERTICALS} points!");
+                    jackpot = WON_VERTICALS;
                 }
             }
 
@@ -193,10 +205,18 @@ Console.WriteLine("Hello there! Let's get started!");
                 //win on both diagonals
                 if (win)
                 {
-                    Console.WriteLine($"Congratulations! You won");
+                    Console.WriteLine($"Congratulations! You won {WON_DIAGONALS} points!");
+                    jackpot = WON_DIAGONALS;
                 }
             }
 
+            int goodBalance = jackpot + playerWager;
+            while (jackpot > 0)
+            {
+                jackpot++;
+            }
+            Console.WriteLine($"Your balance is now: {goodBalance}");
+            
             Console.WriteLine("Would you like to continue playing? Enter yes or no");
 
             string Continue = Console.ReadLine().ToLower();
@@ -214,6 +234,7 @@ Console.WriteLine("Hello there! Let's get started!");
         }
     }
 }
+
 
 
 

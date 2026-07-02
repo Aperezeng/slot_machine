@@ -178,7 +178,6 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             //both diagonal lines 
-            int lastSymbol;
             if (playersMode == DIAGONALS)
             {
                 int firstSymbol = slotBoard[0, 0];
@@ -193,7 +192,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 }
                 
                 int lastColIndex = colsCount - 1;
-                lastSymbol = slotBoard[0, lastColIndex];
+                int lastSymbol = slotBoard[0, lastColIndex];
                 for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
                 {
                     int revCurrentSymbol = slotBoard[m, lastColIndex];

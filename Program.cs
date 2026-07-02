@@ -35,9 +35,9 @@ Console.WriteLine("Hello there! Let's get started!");
         Console.WriteLine("Enter your bid:");
         string validWager = Console.ReadLine();
         int playerWager;
-        while (!int.TryParse(validWager, out playerWager))
+        while (!int.TryParse(validWager, out playerWager) || playerWager < 0)
         {
-            Console.WriteLine("You entered an invalid input. Must enter a number");
+            Console.WriteLine("You entered an invalid input. Must enter a positive number");
             Console.WriteLine("Enter your bid again");
             validWager = Console.ReadLine();
         }
@@ -92,7 +92,6 @@ Console.WriteLine("Hello there! Let's get started!");
             //middle line only 
             if (playersMode == "middle")
             {
-
                 int middleLine = rowsCount / 2;
                 for (int j = 0; j < colsCount; j++)
                 {
@@ -160,7 +159,6 @@ Console.WriteLine("Hello there! Let's get started!");
                         if (firstSymbol != currentSymbol)
                         {
                             eachWin = false;
-                            losses = playerWager; 
                             Console.WriteLine("Sorry, you lost! Better luck next time.");
                             break;
                         }
@@ -193,12 +191,13 @@ Console.WriteLine("Hello there! Let's get started!");
                         break;
                     }
                 }
-
+                
                 int lastColIndex = colsCount - 1;
+                int lastSymbol = slotBoard[0, lastColIndex];
                 for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
                 {
                     int revCurrentSymbol = slotBoard[m, lastColIndex];
-                    if (firstSymbol != revCurrentSymbol)
+                    if (lastSymbol != revCurrentSymbol)
                     {
                         win = false;
                         break;

@@ -43,7 +43,6 @@ Console.WriteLine("Hello there! Let's get started!");
         }
 
         totalBalance += playerWager; 
-        
         Console.WriteLine($"your current balance is {totalBalance}");
 
         Console.WriteLine("What mode would you like?");
@@ -90,7 +89,7 @@ Console.WriteLine("Hello there! Let's get started!");
             bool win = true;
             
             //middle line only 
-            if (playersMode == "middle")
+            if (playersMode == MIDDLE_LINE)
             {
                 int middleLine = rowsCount / 2;
                 for (int j = 0; j < colsCount; j++)
@@ -113,7 +112,7 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             //all horizontal lines 
-            if (playersMode == "horizontals")
+            if (playersMode == HORIZONTALS)
             {
                 bool eachWin = true;
                 for (int i = 0; i < rowsCount; i++)
@@ -147,7 +146,7 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             //all vertical lines 
-            if (playersMode == "verticals")
+            if (playersMode == VERTICALS)
             {
                 bool eachWin = true;
                 for (int j = 0; j < colsCount; j++)
@@ -179,7 +178,8 @@ Console.WriteLine("Hello there! Let's get started!");
             }
 
             //both diagonal lines 
-            if (playersMode == "diagonals")
+            int lastSymbol;
+            if (playersMode == DIAGONALS)
             {
                 int firstSymbol = slotBoard[0, 0];
                 for (int i = 0, j = 0; i < rowsCount && j < colsCount; i++, j++)
@@ -193,7 +193,7 @@ Console.WriteLine("Hello there! Let's get started!");
                 }
                 
                 int lastColIndex = colsCount - 1;
-                int lastSymbol = slotBoard[0, lastColIndex];
+                lastSymbol = slotBoard[0, lastColIndex];
                 for (int m = 0; m < rowsCount && lastColIndex >= 0; m++, lastColIndex--)
                 {
                     int revCurrentSymbol = slotBoard[m, lastColIndex];
@@ -213,12 +213,12 @@ Console.WriteLine("Hello there! Let's get started!");
             
             if (!win)
             {
-                totalBalance = totalBalance - playerWager + jackpot;
+                totalBalance -= playerWager;
                 Console.WriteLine($"You lost {playerWager} points");
             }
             else if (win)
             {
-                totalBalance = playerWager + jackpot;
+                totalBalance += jackpot;
                 Console.WriteLine($"You won {jackpot} points");
             }
             

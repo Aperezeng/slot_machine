@@ -18,14 +18,13 @@ Console.WriteLine("Hello there! Let's get started!");
     const int WON_DIAGONALS = 20;
 
     bool playing = true;
-    int losses = 0;
     int jackpot = 0;
     int totalBalance = 0; 
 
     while (playing)
     {
         int[,] slotBoard = new int[ROWS, COLUMNS];
-
+        
         Console.WriteLine("Here are your mode options:");
         Console.WriteLine($"single middle line: {MIDDLE_LINE}");
         Console.WriteLine($"all horizontal lines: {HORIZONTALS}");
@@ -35,7 +34,7 @@ Console.WriteLine("Hello there! Let's get started!");
         Console.WriteLine("Enter your bid:");
         string validWager = Console.ReadLine();
         int playerWager;
-        while (!int.TryParse(validWager, out playerWager) || playerWager < 0)
+        while (!int.TryParse(validWager, out playerWager) || playerWager <= 0)
         {
             Console.WriteLine("You entered an invalid input. Must enter a positive number");
             Console.WriteLine("Enter your bid again");
@@ -235,8 +234,11 @@ Console.WriteLine("Hello there! Let's get started!");
 
             if (Continue == "yes")
             {
+                
                 Console.WriteLine("Great! Here we go again :)");
             }
+            
+            totalBalance = 0; 
         }
     }
 }
